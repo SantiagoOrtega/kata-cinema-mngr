@@ -30,4 +30,18 @@ public class MoviesServiceImpl implements MoviesService {
         }
     }
 
+    @Override
+    public Integer addMovie(MovieModel movieModel) {
+        try(Handle handle = jdbi.open()) {
+            MoviesDao moviesDao = handle.attach(MoviesDao.class);
+            Integer addMovieId = moviesDao.addMovie(movieModel.getTitle(), movieModel.getGenre(), movieModel.getRunning_Time(),
+                    movieModel.getQualification());
+            LOGGER.info("Movie add successfully, id: {}", addMovieId);
+            return addMovieId;
+        } catch (Exception e) {
+            LOGGER.error("Error to add Movie", e);
+            return 0;
+        }
+    }
+
 }

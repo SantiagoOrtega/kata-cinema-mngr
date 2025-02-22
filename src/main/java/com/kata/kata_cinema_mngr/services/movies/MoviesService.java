@@ -6,4 +6,6 @@ public interface MoviesService {
 
     MovieModel getMovieById(Long movieId);
 
+    Integer addMovie(MovieModel movieModel);
+
 }
