@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/movie")
 public class MoviesController {
@@ -16,9 +18,9 @@ public class MoviesController {
         this.moviesService = moviesService;
     }
 
-    @GetMapping("/getMovie/{id}")
-    public MovieModel getMovie(@PathVariable Long id) {
-        return moviesService.getMovieById(id);
+    @GetMapping("/getMovie")
+    public List<MovieModel> getMovie() {
+        return moviesService.getMovies();
     }
 
     @PostMapping("/addMovie")

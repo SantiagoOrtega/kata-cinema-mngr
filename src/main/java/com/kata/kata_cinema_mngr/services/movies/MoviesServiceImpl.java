@@ -8,6 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class MoviesServiceImpl implements MoviesService {
 
@@ -19,14 +22,14 @@ public class MoviesServiceImpl implements MoviesService {
     }
 
     @Override
-    public MovieModel getMovieById(Long movieId) {
+    public List<MovieModel> getMovies() {
         try(Handle handle = jdbi.open()) {
             MoviesDao moviesDao = handle.attach(MoviesDao.class);
-            LOGGER.info("COMPLETO TRY DE GET MOVIE CON ID: {}", movieId);
-            return moviesDao.getMovieById(movieId);
+            LOGGER.info("COMPLETO TRY DE GET MOVIE CON");
+            return moviesDao.getMovies();
         } catch (Exception e) {
-            LOGGER.error("ENTRO AL CATCH DE GET TASK CON ID: {}", movieId, e);
-            return new MovieModel();
+            LOGGER.error("ENTRO AL CATCH DE GET TASK", e);
+            return Collections.emptyList();
         }
     }
 

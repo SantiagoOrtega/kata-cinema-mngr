@@ -8,12 +8,13 @@ import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.statement.SqlUpdate;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface MoviesDao {
 
-    @SqlQuery("SELECT * FROM movies WHERE id= :movieId;")
+    @SqlQuery("SELECT * FROM movies;")
     @RegisterBeanMapper(MovieModel.class)
-    MovieModel getMovieById(@Bind("movieId") Long movieId) throws SQLException;
+    List<MovieModel> getMovies() throws SQLException;
 
     @SqlUpdate("INSERT INTO movies (title, genre, running_time, qualification) VALUES (:title, :genre, :running_time, :qualification);")
     @GetGeneratedKeys

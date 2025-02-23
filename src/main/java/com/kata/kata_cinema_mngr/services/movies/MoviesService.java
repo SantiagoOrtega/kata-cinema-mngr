@@ -2,9 +2,11 @@ package com.kata.kata_cinema_mngr.services.movies;
 
 import com.kata.kata_cinema_mngr.model.MovieModel;
 
+import java.util.List;
+
 public interface MoviesService {
 
-    MovieModel getMovieById(Long movieId);
+    List<MovieModel> getMovies();
 
     Integer addMovie(MovieModel movieModel);
 
