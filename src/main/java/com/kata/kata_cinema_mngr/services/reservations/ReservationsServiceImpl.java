@@ -43,4 +43,14 @@ public class ReservationsServiceImpl implements ReservationsService {
         }
     }
 
+    @Override
+    public List<ReservationModel> getReservationsByEmail(String email) {
+        try(Handle handle = jdbi.open()) {
+            ReservationsDao reservationsDao = handle.attach(ReservationsDao.class);
+            return reservationsDao.getReservationsByEmail(email);
+        } catch (Exception e) {
+            return Collections.emptyList();
+        }
+    }
+
 }

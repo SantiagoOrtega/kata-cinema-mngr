@@ -21,4 +21,7 @@ public interface ReservationsDao {
     Integer addReservation(@Bind("movie") String movie, @Bind("room") String room, @Bind("schedule") String schedule,
                            @Bind("seats") String seats, @Bind("email") String email) throws SQLException;
 
+    @SqlQuery("SELECT * FROM reservations WHERE email = :email;")
+    @RegisterBeanMapper(ReservationModel.class)
+    List<ReservationModel> getReservationsByEmail(@Bind("email") String email) throws SQLException;
 }

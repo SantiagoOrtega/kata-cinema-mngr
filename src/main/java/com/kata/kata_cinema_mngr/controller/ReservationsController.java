@@ -30,4 +30,10 @@ public class ReservationsController {
         return ResponseEntity.status(HttpStatus.CREATED).body(addReservationId);
     }
 
+    @GetMapping("/getReservationsByEmail")
+    public ResponseEntity<List<ReservationModel>> getReservationByEmail(@RequestParam String email) {
+        List<ReservationModel> reservationModels = reservationsService.getReservationsByEmail(email);
+        return reservationModels != null ? ResponseEntity.ok(reservationModels) : ResponseEntity.notFound().build();
+    }
+
 }

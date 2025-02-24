@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/email")
 public class EmailController {
@@ -19,9 +22,11 @@ public class EmailController {
     }
 
     @PostMapping("/send")
-    public ResponseEntity<String> sendEmail(@RequestBody EmailModel emailModel) {
+    public ResponseEntity<Map<String, String>> sendEmail(@RequestBody EmailModel emailModel) {
         emailService.sendEmail(emailModel.getEmailTo(), emailModel.getSubject(), emailModel.getBody());
-        return ResponseEntity.ok("email sent successfully");
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Email sent successfully");
+        return ResponseEntity.ok(response);
     }
 
 }

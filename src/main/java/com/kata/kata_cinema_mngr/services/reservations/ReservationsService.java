@@ -10,4 +10,6 @@ public interface ReservationsService {
 
     Integer addReservation(ReservationModel reservationModel);
 
+    List<ReservationModel> getReservationsByEmail(String email);
+
 }
