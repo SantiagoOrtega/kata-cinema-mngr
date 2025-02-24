@@ -2,9 +2,9 @@ package com.kata.kata_cinema_mngr.controller;
 
 import com.kata.kata_cinema_mngr.model.RoomModel;
 import com.kata.kata_cinema_mngr.services.rooms.RoomsService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("/room")
 public class RoomsController {
 
-    private RoomsService roomsService;
+    private final RoomsService roomsService;
 
     public RoomsController(RoomsService roomsService) {
         this.roomsService = roomsService;
@@ -21,6 +21,12 @@ public class RoomsController {
     @GetMapping("/getRooms")
     public List<RoomModel> getRooms() {
         return roomsService.getRooms();
+    }
+
+    @PostMapping("/addRoom")
+    public ResponseEntity<Integer> addRoom(@RequestBody RoomModel roomModel) {
+        Integer addRoomId = roomsService.addRoom(roomModel);
+        return ResponseEntity.status(HttpStatus.CREATED).body(addRoomId);
     }
 
 }

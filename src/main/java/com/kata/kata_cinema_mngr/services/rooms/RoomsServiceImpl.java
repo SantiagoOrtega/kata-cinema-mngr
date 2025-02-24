@@ -29,4 +29,15 @@ public class RoomsServiceImpl implements RoomsService{
         }
     }
 
+    @Override
+    public Integer addRoom(RoomModel roomModel) {
+        try(Handle handle = jdbi.open()) {
+            RoomsDao roomsDao = handle.attach(RoomsDao.class);
+            Integer addRoomId = roomsDao.addRoom(roomModel.getRoom(), roomModel.getCapacity());
+            return addRoomId;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
 }

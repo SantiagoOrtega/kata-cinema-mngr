@@ -8,4 +8,6 @@ public interface RoomsService {
 
     List<RoomModel> getRooms();
 
+    Integer addRoom(RoomModel roomModel);
+
 }

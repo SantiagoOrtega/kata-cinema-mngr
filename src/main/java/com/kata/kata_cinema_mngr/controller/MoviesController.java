@@ -12,13 +12,13 @@ import java.util.List;
 @RequestMapping("/movie")
 public class MoviesController {
 
-    private MoviesService moviesService;
+    private final MoviesService moviesService;
 
     public MoviesController(MoviesService moviesService) {
         this.moviesService = moviesService;
     }
 
-    @GetMapping("/getMovie")
+    @GetMapping("/getMovies")
     public List<MovieModel> getMovie() {
         return moviesService.getMovies();
     }
